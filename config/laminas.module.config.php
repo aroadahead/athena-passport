@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use AthenaPassport\Controller\DashboardController;
+use AthenaPassport\Controller\Factory\DashboardControllerFactory;
 use AthenaPassport\Controller\Factory\IndexControllerFactory;
 use AthenaPassport\Controller\IndexController;
 use AthenaPassport\Service\Factory\PassportServiceFactory;
@@ -18,6 +20,7 @@ return [
     'controllers' => [
         'factories' => [
             IndexController::class => IndexControllerFactory::class,
+            DashboardController::class => DashboardControllerFactory::class
         ]
     ],
     'service_manager' => [
@@ -38,6 +41,16 @@ return [
                         'action' => 'alive',
                     ],
                 ],
+            ],
+            'passport.dashboard' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => $lamins->route('dashboard','passport'),
+                    'defaults' => [
+                        'controller' => DashboardController::class,
+                        'action' => 'index'
+                    ]
+                ]
             ]
         ]
     ]
